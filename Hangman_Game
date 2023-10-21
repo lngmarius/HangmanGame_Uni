@@ -34,7 +34,7 @@
     <div id="game-container">
         <h1>Hangman Game</h1>
         <div id="word"></div> <!-- word to guess -->
-        <div id="lives>Lives: <span id="lives-count">3</span></div> <!-- lives -->
+        <div id="lives">Lives: <span id="lives-count">3</span></div> <!-- lives -->
         <div id="message"></div> <!-- win/lose message -->
         <div id="retry" style="display: none;">
             <p>Press 'F5' to try again!</p> 
