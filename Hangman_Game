@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Spanzarutoarea</title> 
+    <title>Hangman Game</title> 
     <style>
         body {
             font-family: Arial, sans-serif;
             text-align: center;
-            background-color: #E2C799; /* fundal */
+            background-color: #E2C799; /* background */
         }
         #game-container {
             background-color: #F2ECBE;
@@ -32,48 +32,48 @@
 </head>
 <body>
     <div id="game-container">
-        <h1>Spanzarutoarea</h1>
-        <div id="word"></div> <!--cunvat de ghicit-->
-        <div id="lives">Vieti: <span id="lives-count">3</span></div> <!-- vieti -->
-        <div id="message"></div> <!-- mesaj win/lose-->
+        <h1>Hangman Game</h1>
+        <div id="word"></div> <!-- word to guess -->
+        <div id="lives>Lives: <span id="lives-count">3</span></div> <!-- lives -->
+        <div id="message"></div> <!-- win/lose message -->
         <div id="retry" style="display: none;">
-            <p>Apasa 'F5' sa incerci din nou!</p> 
+            <p>Press 'F5' to try again!</p> 
         </div>
 
         <script>
-            const words = ['banana', 'program', 'javascript', 'calculator'];
-            var selectedWord = words[Math.floor(Math.random() * words.length)]; // cuvant random
+            const words = ['apple', 'banana', 'chocolate', 'dolphin', 'elephant', 'flamingo', 'giraffe', 'happiness', 'ice cream', 'jazz', 'koala', 'lighthouse', 'moonlight', 'nightingale', 'octopus', 'penguin', 'quicksilver', 'rainbow', 'strawberry', 'tiger', 'umbrella', 'violin', 'waterfall', 'xylophone', 'yacht', 'zebra', 'sunflower', 'mountain', 'whisper'];
+            var selectedWord = words[Math.floor(Math.random() * words.length)]; // random word
             var lives = 3; 
-            var wordState = Array(selectedWord.length).fill('-'); // cuvant cenzurat
+            var wordState = Array(selectedWord.length).fill('-'); // censored word
 
             function updateWordDisplay() {
                 const wordDisplay = document.getElementById('word');
-                wordDisplay.textContent = wordState.join(' '); // update cuvant
+                wordDisplay.textContent = wordState.join(' '); // update word
             }
 
             function guessLetter(letter) {
                 if (lives > 0) {
-                    if (selectedWord.includes(letter)) { // daca litera este in cuvant
+                    if (selectedWord.includes(letter)) { // if the letter is in the word
                         for (let i = 0; i < selectedWord.length; i++) {
                             if (selectedWord[i] === letter) {
-                                wordState[i] = letter; // update litera in cuvant
+                                wordState[i] = letter; // update the letter in the word
                             }
                         }
                     } else {
                         lives--;
                         const livesCount = document.getElementById('lives-count');
-                        livesCount.textContent = lives; // scade o viata
+                        livesCount.textContent = lives; // decrease a life
                     }
 
-                    updateWordDisplay(); //  afișare cuvant ghicitor
+                    updateWordDisplay(); // display the guessing word
 
-                    if (wordState.join('') === selectedWord) { //varianta castgatoare
+                    if (wordState.join('') === selectedWord) { // winning condition
                         document.getElementById('game-container').style.backgroundColor = 'green'; 
-                        document.getElementById('message').textContent = 'Ai castigat!'; 
+                        document.getElementById('message').textContent = 'You won!'; 
                         document.getElementById('retry').style.display = 'block';
-                    } else if (lives === 0) { //varianta pierzatoare
+                    } else if (lives === 0) { // losing condition
                         document.getElementById('game-container').style.backgroundColor = 'red'; 
-                        document.getElementById('message').textContent = 'Ai pierdut!'; 
+                        document.getElementById('message').textContent = 'You lost!'; 
                         document.getElementById('retry').style.display = 'block'; 
                     }
                 }
@@ -81,8 +81,8 @@
 
             function keyHandler(event) {
                 const letter = event.key.toLowerCase();
-                if (/^[a-z]$/.test(letter)) { //litera mica
-                    guessLetter(letter); // Funcția de ghicire a literei pe baza tastei apăsate
+                if (/^[a-z]$/.test(letter)) { // lowercase letter
+                    guessLetter(letter); // Letter guessing function based on the pressed key
                 }
             }
 
